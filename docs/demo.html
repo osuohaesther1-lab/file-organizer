@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>File Organizer - Demo</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; padding: 40px; }
+    .window {
+      max-width: 760px; margin: 0 auto; background: #1e293b;
+      border-radius: 12px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.5);
+      border: 1px solid #334155;
+    }
+    .titlebar { background: #111827; padding: 10px 16px; display: flex; align-items: center; gap: 8px; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+    .dot.r { background: #f87171; } .dot.y { background: #fbbf24; } .dot.g { background: #34d399; }
+    .titlebar span.title { margin-left: 10px; color: #94a3b8; font-size: 13px; }
+    .body { padding: 20px 24px; font-family: 'Cascadia Mono', Consolas, monospace; font-size: 13px; line-height: 1.55; }
+    .prompt { color: #34d399; font-weight: bold; }
+    .cmd { color: #f8fafc; }
+    .arrow { color: #60a5fa; }
+    .dim { color: #64748b; }
+    .hdr { color: #fbbf24; font-weight: bold; margin-top: 8px; }
+    .out { color: #e2e8f0; }
+    h2 { margin: 34px 0 14px; font-size: 15px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+    .tree { background: #0b1220; border: 1px solid #1e293b; border-radius: 8px; padding: 16px 20px; font-family: 'Cascadia Mono', Consolas, monospace; font-size: 13px; line-height: 1.6; }
+    .tree .folder { color: #fbbf24; }
+    .tree .file { color: #cbd5e1; }
+    .tree .comment { color: #64748b; }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="titlebar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="title">PowerShell — file_organizer.py</span>
+    </div>
+    <div class="body">
+      <div><span class="prompt">PS&gt;</span> <span class="cmd">python file_organizer.py --folder test-downloads --dry-run</span></div>
+
+      <div class="hdr">DRY RUN - nothing will be moved: test-downloads</div>
+      <div class="dim">------------------------------------------------------------</div>
+      <div class="out">  backup.zip        <span class="arrow">-&gt;</span>  Archives\backup.zip</div>
+      <div class="out">  birthday.mp4      <span class="arrow">-&gt;</span>  Videos\birthday.mp4</div>
+      <div class="out">  budget.xlsx       <span class="arrow">-&gt;</span>  Spreadsheets\budget.xlsx</div>
+      <div class="out">  clip.mov          <span class="arrow">-&gt;</span>  Videos\clip.mov</div>
+      <div class="out">  data.csv          <span class="arrow">-&gt;</span>  Spreadsheets\data.csv</div>
+      <div class="out">  font.ttf          <span class="arrow">-&gt;</span>  Fonts\font.ttf</div>
+      <div class="out">  index.html        <span class="arrow">-&gt;</span>  Code\index.html</div>
+      <div class="out">  meme.gif          <span class="arrow">-&gt;</span>  Images\meme.gif</div>
+      <div class="out">  mystery.xyz       <span class="arrow">-&gt;</span>  Other\mystery.xyz</div>
+      <div class="out">  notes.txt         <span class="arrow">-&gt;</span>  Documents\notes.txt</div>
+      <div class="out">  photo.jpg         <span class="arrow">-&gt;</span>  Images\photo.jpg</div>
+      <div class="out">  photos.rar        <span class="arrow">-&gt;</span>  Archives\photos.rar</div>
+      <div class="out">  podcast.wav       <span class="arrow">-&gt;</span>  Audio\podcast.wav</div>
+      <div class="out">  profile.png       <span class="arrow">-&gt;</span>  Images\profile.png</div>
+      <div class="out">  resume.pdf        <span class="arrow">-&gt;</span>  Documents\resume.pdf</div>
+      <div class="out">  script.py         <span class="arrow">-&gt;</span>  Code\script.py</div>
+      <div class="out">  setup.exe         <span class="arrow">-&gt;</span>  Installers\setup.exe</div>
+      <div class="out">  slides.pptx       <span class="arrow">-&gt;</span>  Presentations\slides.pptx</div>
+      <div class="out">  song.mp3          <span class="arrow">-&gt;</span>  Audio\song.mp3</div>
+      <div class="out">  vacation.jpg      <span class="arrow">-&gt;</span>  Images\vacation.jpg</div>
+      <div class="dim">------------------------------------------------------------</div>
+      <div class="out">Total files: 20</div>
+      <div class="out">Dry run complete. Remove --dry-run to organize for real.</div>
+    </div>
+  </div>
+
+  <h2>Before</h2>
+  <div class="tree">
+    <span class="folder">test-downloads/</span><br>
+    <span class="file">&nbsp;&nbsp;backup.zip &nbsp; birthday.mp4 &nbsp; budget.xlsx &nbsp; clip.mov</span><br>
+    <span class="file">&nbsp;&nbsp;data.csv &nbsp; font.ttf &nbsp; index.html &nbsp; meme.gif</span><br>
+    <span class="file">&nbsp;&nbsp;mystery.xyz &nbsp; notes.txt &nbsp; photo.jpg &nbsp; photos.rar</span><br>
+    <span class="file">&nbsp;&nbsp;podcast.wav &nbsp; profile.png &nbsp; resume.pdf &nbsp; script.py</span><br>
+    <span class="file">&nbsp;&nbsp;setup.exe &nbsp; slides.pptx &nbsp; song.mp3 &nbsp; vacation.jpg</span><br>
+    <span class="comment">&nbsp;&nbsp;← 20 files, all mixed together</span>
+  </div>
+
+  <h2>After</h2>
+  <div class="tree">
+    <span class="folder">test-downloads/</span><br>
+    <span class="folder">&nbsp;&nbsp;├─ Archives/</span> <span class="file">backup.zip, photos.rar</span><br>
+    <span class="folder">&nbsp;&nbsp;├─ Audio/</span> <span class="file">podcast.wav, song.mp3</span><br>
+    <span class="folder">&nbsp;&nbsp;├─ Code/</span> <span class="file">index.html, script.py</span><br>
+    <span class="folder">&nbsp;&nbsp;├─ Documents/</span> <span class="file">notes.txt, resume.pdf</span><br>
+    <span class="folder">&nbsp;&nbsp;├─ Fonts/</span> <span class="file">font.ttf</span><br>
+    <span class="folder">&nbsp;&nbsp;├─ Images/</span> <span class="file">meme.gif, photo.jpg, profile.png, vacation.jpg</span><br>
+    <span class="folder">&nbsp;&nbsp;├─ Installers/</span> <span class="file">setup.exe</span><br>
+    <span class="folder">&nbsp;&nbsp;├─ Other/</span> <span class="file">mystery.xyz</span><br>
+    <span class="folder">&nbsp;&nbsp;├─ Presentations/</span> <span class="file">slides.pptx</span><br>
+    <span class="folder">&nbsp;&nbsp;├─ Spreadsheets/</span> <span class="file">budget.xlsx, data.csv</span><br>
+    <span class="folder">&nbsp;&nbsp;└─ Videos/</span> <span class="file">birthday.mp4, clip.mov</span><br>
+    <span class="comment">&nbsp;&nbsp;← sorted into 11 clean category folders</span>
+  </div>
+</body>
+</html>
