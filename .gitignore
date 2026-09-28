@@ -1,0 +1,10 @@
+# Python
+__pycache__/
+*.pyc
+
+# Database (regenerate with seed.py)
+inventory.db
+
+# Test data (use docs/demo.html for a visual demo)
+test-downloads/
+.file_organizer_log.json
